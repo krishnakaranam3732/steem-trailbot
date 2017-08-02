@@ -4,7 +4,7 @@ from piston.amount import Amount
 from piston.block import Block
 from pistonbase import transactions
 from pistonapi.steemnoderpc import SteemNodeRPC
-import sqlite3
+#import sqlite3
 import json
 import math
 import sys
@@ -21,12 +21,12 @@ node = 'ws://steemd.pevo.science:8090'
 print('voting with: '+votewith+ ' and wif: '+wif)
 
 follow = {
-  'krish3732': 10, # follow with 10% of curator's weight
-  'pikachuu': 10,   # follow with 10% fixed
-  'lollypoppin': 10, # follow with 10% of curator's weight
-  'crazybunny': 10,   # follow with 10% fixed
-  'honeyheart': 10, # follow with 10% of curator's weight
-  'photospyder': 10   # follow with 10% fixed
+  'krish3732': 0.10, # follow with 10% of curator's weight
+  'pikachuu': 0.10,   # follow with 10% fixed
+  'lollypoppin': 0.10, # follow with 10% of curator's weight
+  'crazybunny': 0.10,   # follow with 10% fixed
+  'honeyheart': 0.10, # follow with 10% of curator's weight
+  'photospyder': 0.10   # follow with 10% fixed
 }
 
 clones = {
@@ -41,8 +41,8 @@ except_authors = [
 client = Steem(node=node,wif=wif)
 blockchain = Blockchain()
 rpc = SteemNodeRPC(node)
-conn = sqlite3.connect('bot.db')
-c = conn.cursor()
+#conn = sqlite3.connect('bot.db')
+#c = conn.cursor()
 
 def main(lastblock):
   thisblock = blockchain.get_current_block_num()
@@ -97,11 +97,11 @@ def followvote(op):
       castvote(transactions.Operation(nop))
 
       print('Voted on '+postid+' following '+op["voter"]+' with '+str(weight)+'%')
-      try:
-        with conn:
-          c.execute('''INSERT OR IGNORE INTO votes (postid, weight, voter, reward) VALUES (?,?,?,?)''', (postid, weight, op['voter'], 0,))
-      except:
-        print('vote not saved')
+      #try:
+      #  with conn:
+      #    c.execute('''INSERT OR IGNORE INTO votes (postid, weight, voter, reward) VALUES (?,?,?,?)''', (postid, weight, op['voter'], 0,))
+      #except:
+      #  print('vote not saved')
 
 
 def reward(op):
@@ -110,11 +110,11 @@ def reward(op):
 
   print("Valid reward found")
   postid = '@'+op['comment_author']+'/'+op['comment_permlink']
-  try:
-    with conn:
-      c.execute('''UPDATE votes SET reward=? WHERE postid=?''', (op['reward'][:-6],postid,))
-  except:
-    print('vote not found, no reward saved')
+  #try:
+  #  with conn:
+  #    c.execute('''UPDATE votes SET reward=? WHERE postid=?''', (op['reward'][:-6],postid,))
+  #except:
+  #  print('vote not found, no reward saved')
 
 def castvote(op):
   expiration = transactions.formatTimeFromNow(180)
@@ -145,10 +145,11 @@ if __name__ == "__main__":
 
     if lastblock == tmp:
       repeats += 1
+      print('repeating with: '+repeats)
     else:
       repeats = 0
 
-    if repeats >= 2500:
+    if repeats >= 25:
       sys.exit()
 
     time.sleep(3)
