@@ -22,7 +22,7 @@ node = 'ws://steemd.pevo.science:8090'
 print('voting with: '+votewith+ ' and wif: '+wif)
 steem = Steem(wif = steemPostingKey)
 tags = ["funny", "meme", "bot"]
-past_authors = []
+past_authors = ["riounh34"]
 
 follow = {
   'krish3732': 0.10, # follow with 10% of curator's weight
