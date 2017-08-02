@@ -73,7 +73,7 @@ def followvote(op):
       print('already voted on '+postid)
       dovote = False
 
-print('dovote: '+dovote)
+
       
 if dovote == True and (str(post['last_payout']) != '1970-01-01 00:00:00' or post['max_accepted_payout'] == Amount('0.000 SBD')):
     print(postid+' is not a curation rewarding post')
