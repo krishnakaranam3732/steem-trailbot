@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
     if lastblock == tmp:
       repeats += 1
-      print('repeating with: '+repeats)
+      print('repeating with: '+str(repeats))
     else:
       repeats = 0
 
