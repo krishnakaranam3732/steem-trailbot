@@ -75,11 +75,11 @@ def followvote(op):
 
 print('dovote: '+dovote)
       
-  if dovote == True and (str(post['last_payout']) != '1970-01-01 00:00:00' or post['max_accepted_payout'] == Amount('0.000 SBD')):
+if dovote == True and (str(post['last_payout']) != '1970-01-01 00:00:00' or post['max_accepted_payout'] == Amount('0.000 SBD')):
     print(postid+' is not a curation rewarding post')
     dovote = False
 
-  if dovote == True:
+if dovote == True:
     fweight = follow[op['voter']]
     weight = fweight
     if op['weight'] == 0:
