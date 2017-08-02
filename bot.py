@@ -18,6 +18,8 @@ votewith = steemAccountName
 wif = steemPostingKey
 node = 'ws://steemd.pevo.science:8090'
 
+print('voting with: '+votewith+ ' and wif: '+wif)
+
 follow = {
   'krish3732': 10, # follow with 10% of curator's weight
   'pikachuu': 10,   # follow with 10% fixed
@@ -61,7 +63,7 @@ def main(lastblock):
 def followvote(op):
   if op['weight'] <= 1 or op['voter'] not in follow or op['author'] in except_authors or op['author'] == op['voter'] or (op['voter'] in clones and op['author'] in clones[op['voter']]):
     return False
-
+  
   print("Valid vote found by "+op['voter']+" ("+str(op['weight'])+")")
   postid = '@'+op['author']+'/'+op['permlink']
   post = client.get_post(postid)
@@ -71,6 +73,8 @@ def followvote(op):
       print('already voted on '+postid)
       dovote = False
 
+print('dovote: '+dovote)
+      
   if dovote == True and (str(post['last_payout']) != '1970-01-01 00:00:00' or post['max_accepted_payout'] == Amount('0.000 SBD')):
     print(postid+' is not a curation rewarding post')
     dovote = False
@@ -146,7 +150,7 @@ if __name__ == "__main__":
     else:
       repeats = 0
 
-    if repeats >= 25:
+    if repeats >= 2500:
       sys.exit()
 
     time.sleep(3)
