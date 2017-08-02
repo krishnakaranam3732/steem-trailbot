@@ -9,14 +9,22 @@ import json
 import math
 import sys
 import time
+import os
 
-votewith = 'accountname'
-wif = '5...'
+steemPostingKey = os.environ.get('steemPostingKey')
+steemAccountName = os.environ.get('steemAccountName')
+
+votewith = steemAccountName
+wif = steemPostingKey
 node = 'ws://steemd.pevo.science:8090'
 
 follow = {
-  'curator1': 0.1, # follow with 10% of curator's weight
-  'curator2': 10   # follow with 10% fixed
+  'krish3732': 10, # follow with 10% of curator's weight
+  'pikachuu': 10   # follow with 10% fixed
+  'lollypoppin': 10, # follow with 10% of curator's weight
+  'crazybunny': 10   # follow with 10% fixed
+  'honeyheart': 10, # follow with 10% of curator's weight
+  'photospyder': 10   # follow with 10% fixed
 }
 
 clones = {
