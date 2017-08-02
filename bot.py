@@ -1,4 +1,5 @@
 from piston import Steem
+from piston.post import Post
 from piston.blockchain import Blockchain
 from piston.amount import Amount
 from piston.block import Block
@@ -19,6 +20,9 @@ wif = steemPostingKey
 node = 'ws://steemd.pevo.science:8090'
 
 print('voting with: '+votewith+ ' and wif: '+wif)
+steem = Steem(wif = steemPostingKey)
+tags = ["funny", "meme", "bot"]
+past_authors = []
 
 follow = {
   'krish3732': 0.10, # follow with 10% of curator's weight
@@ -37,6 +41,23 @@ except_authors = [
   'spammer',
   'plagiarizer'
 ]
+
+for p in steem.stream_comments():
+    for x in tags:
+        try:
+            if x in p["tags"] and p.is_opening_post() and p["author"] not in past_authors:
+                print(p.get_comments())
+                print(p["author"])
+                post = p.reply(body = "I am Groot! :D", author = steemAccountName)
+                p.upvote(weight=+0.01, voter = steemAccountName)
+                print(post)
+                past_authors.append(post['operations'][0][1]['parent_author'])
+                time.sleep(20)
+                print(past_authors)
+
+        except:
+            print("Failed to comment on post.")
+
 
 client = Steem(node=node,wif=wif)
 blockchain = Blockchain()
