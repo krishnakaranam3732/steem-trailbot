@@ -20,9 +20,9 @@ node = 'ws://steemd.pevo.science:8090'
 
 follow = {
   'krish3732': 10, # follow with 10% of curator's weight
-  'pikachuu': 10   # follow with 10% fixed
+  'pikachuu': 10,   # follow with 10% fixed
   'lollypoppin': 10, # follow with 10% of curator's weight
-  'crazybunny': 10   # follow with 10% fixed
+  'crazybunny': 10,   # follow with 10% fixed
   'honeyheart': 10, # follow with 10% of curator's weight
   'photospyder': 10   # follow with 10% fixed
 }
