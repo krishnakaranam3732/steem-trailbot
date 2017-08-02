@@ -45,7 +45,7 @@ except_authors = [
 for p in steem.stream_comments():
     for x in tags:
         try:
-            if x in p["tags"] and p.is_opening_post() and p["author"] not in past_authors:
+            if x in p["tags"] and p["author"] not in past_authors:
                 print(p.get_comments())
                 print(p["author"])
                 post = p.reply(body = "I am Groot! :D", author = steemAccountName)
