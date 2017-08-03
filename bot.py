@@ -47,7 +47,8 @@ for p in steem.stream_comments():
                 autherofpost = {"author": p["author"]}
                 insert_id = collection.insert_one(autherofpost).inserted_id
                 print("inserted id :"+ str(insert_id))
-                p.upvote(weight=100)
+                #p.upvote(weight=100)
+                steem.vote(identifier = '@'+p["author"]+'/'+p["permlink"], weight=100.0, voter=steemAccountName) 
                 print("Upvote done.")
                 print(post)
                 past_authors.append(post['operations'][0][1]['parent_author'])
