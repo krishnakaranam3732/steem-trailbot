@@ -33,13 +33,13 @@ node = 'ws://steemd.pevo.science:8090'
 
 print('voting with: '+votewith+ ' and wif: '+wif)
 steem = Steem(wif = steemPostingKey)
-tags = ["steem","cheetah","steemit"]
+tags = ["life","steemit","photography","kry","art","bitcoin","introduceyourself","travel","blog","food","cryptocurrency","steem","spanish","news","funny","nature","money","story","writing","colorchallenge","music","health","cn","poetry","politics","love","indonesia","science","technology","video","introducemyself","crypto","aceh","blockchain","philosophy","meme","deutsch","gaming","photo","contest","history","animals","steemitphotochallenge","ethereum","kr-newbie","fun","drawing","steemit-health","freedom"]
 past_authors = ["riounh34","alex-icey","amvanaken","djneontiger","midgetspinner","bubusik","amirl","hauntedbrain","riounh34","dtworker"]
 
 for p in steem.stream_comments():
     for x in tags:
         try:
-            if x not in p["tags"] and collection.find({"author": p["author"]}).count() != 1 and p["author"] not in past_authors:
+            if x in p["tags"] and collection.find({"author": p["author"]}).count() != 1 and p["author"] not in past_authors:
                 print(p.get_comments())
                 print("Author of post: "+p["author"])
                 post = p.reply(body = "I am Groot! :D", author = steemAccountName)
