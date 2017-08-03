@@ -43,12 +43,12 @@ for p in steem.stream_comments():
                 print(p.get_comments())
                 print("Author of post: "+p["author"])
                 post = p.reply(body = "I am Groot! :D", author = steemAccountName)
-				        print("comment on post done.")
-				        autherofpost = {"author": p["author"]}
-				        insert_id = collection.insert_one(autherofpost).inserted_id
-				        print("inserted id :"+ str(insert_id))
+		print("comment on post done.")
+		autherofpost = {"author": p["author"]}
+		insert_id = collection.insert_one(autherofpost).inserted_id
+		print("inserted id :"+ str(insert_id))
                 p.upvote(weight=+0.01, voter = steemAccountName)
-				        print("Upvote done.")
+		print("Upvote done.")
                 print(post)
                 past_authors.append(post['operations'][0][1]['parent_author'])
                 time.sleep(40)
