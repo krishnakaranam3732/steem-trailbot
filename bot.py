@@ -33,13 +33,13 @@ node = 'ws://steemd.pevo.science:8090'
 
 print('voting with: '+votewith+ ' and wif: '+wif)
 steem = Steem(wif = steemPostingKey)
-tags = ["funny", "meme", "bot"]
+tags = []
 past_authors = ["riounh34","alex-icey","amvanaken","djneontiger","midgetspinner","bubusik","amirl","hauntedbrain","riounh34","dtworker"]
 
 for p in steem.stream_comments():
     for x in tags:
         try:
-            if x in p["tags"] and collection.find({"author": p["author"]}).count() != 1 and p["author"] not in past_authors:
+            if x not in p["tags"] and collection.find({"author": p["author"]}).count() != 1 and p["author"] not in past_authors:
                 print(p.get_comments())
                 print("Author of post: "+p["author"])
                 post = p.reply(body = "I am Groot! :D", author = steemAccountName)
@@ -56,3 +56,4 @@ for p in steem.stream_comments():
 
         except:
             print("Failed to comment on post.")
+            time.sleep(40)
