@@ -33,7 +33,7 @@ node = 'ws://steemd.pevo.science:8090'
 
 print('voting with: '+votewith+ ' and wif: '+wif)
 steem = Steem(wif = steemPostingKey)
-tags = []
+tags = ["steem","cheetah","steemit"]
 past_authors = ["riounh34","alex-icey","amvanaken","djneontiger","midgetspinner","bubusik","amirl","hauntedbrain","riounh34","dtworker"]
 
 for p in steem.stream_comments():
@@ -55,5 +55,5 @@ for p in steem.stream_comments():
                 print("Past Authors: "+past_authors)
 
         except:
-            print("Failed to comment on post.")
-            time.sleep(40)
+            print("Failed to comment on post. Sleeping: 20.")
+            time.sleep(20)
