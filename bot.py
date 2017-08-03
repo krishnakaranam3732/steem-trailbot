@@ -40,14 +40,14 @@ for p in steem.stream_comments():
     for x in tags:
         try:
             if x in p["tags"] and collection.find({"author": p["author"]}).count() != 1 and p["author"] not in past_authors:
-                print(p.get_comments())
+                #print(p.get_comments())
                 print("Author of post: "+p["author"])
                 post = p.reply(body = "I am Groot! :D", author = steemAccountName)
                 print("comment on post done.")
                 autherofpost = {"author": p["author"]}
                 insert_id = collection.insert_one(autherofpost).inserted_id
                 print("inserted id :"+ str(insert_id))
-                p.upvote(weight=+0.01, voter = steemAccountName)
+                p.upvote()
                 print("Upvote done.")
                 print(post)
                 past_authors.append(post['operations'][0][1]['parent_author'])
@@ -56,4 +56,4 @@ for p in steem.stream_comments():
 
         except:
             print("Failed to comment on post. Sleeping: 20.")
-            time.sleep(20)
+            time.sleep(40)
